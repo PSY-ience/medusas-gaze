@@ -6,6 +6,7 @@
 #include "mod/Config.h"
 
 #include <pl/Mod.hpp>
+#include <bedrocktools/BedrockTools.hpp>
 
 namespace medusas_gaze {
 
@@ -26,6 +27,10 @@ class MedusasGazeMod {
     ll::mod::NativeMod &mSelf;
     ModConfig mConfig;
     std::optional<pl::config::ConfigFile<ModConfig>> mConfigFile;
+
+    bedrocktools::events::RuntimeListener<
+        bedrocktools::events::LocalPlayerTickEvent
+    > mTickListener;
 };
 
 } // namespace medusas_gaze
