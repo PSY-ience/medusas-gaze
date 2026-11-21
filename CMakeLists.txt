@@ -53,11 +53,31 @@ FetchContent_Declare(
     GIT_SHALLOW TRUE
 )
 
+FetchContent_Declare(
+    EnTT
+    GIT_REPOSITORY https://github.com/skypjack/entt.git
+    GIT_TAG v3.16.0
+)
+
+FetchContent_Declare(
+    glm
+    GIT_REPOSITORY https://github.com/g-truc/glm.git
+    GIT_TAG 1.0.3
+)
+
 FetchContent_GetProperties(bedrocktools_sdk)
 if(NOT bedrocktools_sdk_POPULATED)
     FetchContent_Populate(bedrocktools_sdk)
 endif()
-FetchContent_MakeAvailable(preloader_android nlohmann_json boost_pfr magic_enum fmt)
+FetchContent_MakeAvailable(
+    preloader_android
+    nlohmann_json
+    boost_pfr
+    magic_enum
+    fmt
+    EnTT
+    glm
+)
 
 FetchContent_GetProperties(preloader_android)
 set(LEVI_PRELOADER_INCLUDE_DIR "${preloader_android_SOURCE_DIR}/include")
@@ -161,6 +181,8 @@ target_link_libraries(${MOD_LIBRARY_NAME} PRIVATE
     Boost::pfr
     magic_enum::magic_enum
     fmt::fmt
+    EnTT::EnTT
+    glm::glm
 )
 
 if(TARGET preloader)
