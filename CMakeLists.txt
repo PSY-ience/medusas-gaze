@@ -46,6 +46,17 @@ FetchContent_Declare(
 set(FMT_DOC OFF CACHE BOOL "Disable fmt docs" FORCE)
 set(FMT_TEST OFF CACHE BOOL "Disable fmt tests" FORCE)
 set(FMT_INSTALL OFF CACHE BOOL "Disable fmt install rules" FORCE)
+FetchContent_Declare(
+    bedrocktools_sdk
+    GIT_REPOSITORY https://github.com/QYCottage/BedrockTools.git
+    GIT_TAG v1.5.6
+    GIT_SHALLOW TRUE
+)
+
+FetchContent_GetProperties(bedrocktools_sdk)
+if(NOT bedrocktools_sdk_POPULATED)
+    FetchContent_Populate(bedrocktools_sdk)
+endif()
 FetchContent_MakeAvailable(preloader_android nlohmann_json boost_pfr magic_enum fmt)
 
 FetchContent_GetProperties(preloader_android)
@@ -130,6 +141,7 @@ target_include_directories(${MOD_LIBRARY_NAME}
     PRIVATE
         src
         "${LEVI_PRELOADER_INCLUDE_DIR}"
+        "${bedrocktools_sdk_SOURCE_DIP}/include" 
 )
 
 target_compile_options(${MOD_LIBRARY_NAME}
