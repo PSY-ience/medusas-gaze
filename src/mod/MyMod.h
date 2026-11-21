@@ -1,3 +1,4 @@
+
 #pragma once
 
 #include <optional>
@@ -6,13 +7,13 @@
 
 #include <pl/Mod.hpp>
 
-namespace clange_me {
+namespace medusas_gaze {
 
-class ClangeMeMod {
+class MedusasGazeMod {
   public:
-    static ClangeMeMod &instance();
+    static MedusasGazeMod &instance();
 
-    ClangeMeMod();
+    MedusasGazeMod();
 
     [[nodiscard]] ll::mod::NativeMod &getSelf() const { return mSelf; }
 
@@ -27,4 +28,4 @@ class ClangeMeMod {
     std::optional<pl::config::ConfigFile<ModConfig>> mConfigFile;
 };
 
-} // namespace clange_me
+} // namespace medusas_gaze
