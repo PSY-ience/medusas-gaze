@@ -44,6 +44,7 @@ bool MedusasGazeMod::load() {
     return true;
 }
 
+
 bool MedusasGazeMod::enable() {
     auto &self = getSelf();
     self.getLogger().debug("Enabling Medusa's Gaze...");
@@ -53,13 +54,38 @@ bool MedusasGazeMod::enable() {
         return true;
     }
 
+    mTickEventLogged = false;
+
+    const bool subscribed = mTickListener.subscribe(
+        [this](bedrocktools::events::LocalPlayerTickEvent &event) {
+            if (!event.player || mTickEventLogged) {
+                return;
+            }
+
+            getSelf().getLogger().info(
+                "Medusa's Gaze detected the local player tick!"
+            );
+
+            mTickEventLogged = true;
+        }
+    );
+
+    if (!subscribed) {
+        self.getLogger().error(
+            "Failed to subscribe to BedrockTools player tick event!"
+        );
+        return false;
+    }
+
     self.getLogger().info("Medusa's Gaze is ready!");
     return true;
 }
 
+
 bool MedusasGazeMod::disable() {
     getSelf().getLogger().debug("Disabling Medusa's Gaze...");
     return true;
+    mTickListener.reset();
 }
 
 bool MedusasGazeMod::unload() {
