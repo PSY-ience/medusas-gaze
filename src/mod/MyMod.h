@@ -32,6 +32,7 @@ class MedusasGazeMod {
         bedrocktools::events::LocalPlayerTickEvent
     > mTickListener;
 bool mTickEventLogged = false;
+bool mListenerSubscribed = false;
 };
 
 } // namespace medusas_gaze
