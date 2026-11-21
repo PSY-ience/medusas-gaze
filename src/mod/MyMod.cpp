@@ -84,12 +84,13 @@ bool MedusasGazeMod::enable() {
 
 bool MedusasGazeMod::disable() {
     getSelf().getLogger().debug("Disabling Medusa's Gaze...");
-    return true;
     mTickListener.reset();
+    return true;
 }
 
 bool MedusasGazeMod::unload() {
     getSelf().getLogger().debug("Unloading Medusa's Gaze...");
+    mTickListener.reset();
     mConfigFile.reset();
     return true;
 }
