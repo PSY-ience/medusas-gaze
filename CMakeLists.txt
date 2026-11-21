@@ -141,7 +141,7 @@ target_include_directories(${MOD_LIBRARY_NAME}
     PRIVATE
         src
         "${LEVI_PRELOADER_INCLUDE_DIR}"
-        "${bedrocktools_sdk_SOURCE_DIP}/include" 
+        "${bedrocktools_sdk_SOURCE_DIR}/include" 
 )
 
 target_compile_options(${MOD_LIBRARY_NAME}
