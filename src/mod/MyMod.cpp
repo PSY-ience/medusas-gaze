@@ -1,27 +1,28 @@
+
 #include "mod/MyMod.h"
 
 #include <filesystem>
 
 #include <pl/Mod.hpp>
 
-namespace clange_me {
+namespace medusas_gaze {
 
-ClangeMeMod &ClangeMeMod::instance() {
-    static ClangeMeMod instance;
+MedusasGazeMod &MedusasGazeMod::instance() {
+    static MedusasGazeMod instance;
     return instance;
 }
 
-ClangeMeMod::ClangeMeMod() : mSelf(*ll::mod::NativeMod::current()) {}
+MedusasGazeMod::MedusasGazeMod() : mSelf(*ll::mod::NativeMod::current()) {}
 
-bool ClangeMeMod::load() {
+bool MedusasGazeMod::load() {
     auto &self = getSelf();
-    self.getLogger().debug("Loading...");
+    self.getLogger().debug("Loading Medusa's Gaze...");
 
     std::error_code ec;
     std::filesystem::create_directories(self.getDataDir(), ec);
     if (ec) {
-        self.getLogger().error("Failed to create data directory {}: {}", self.getDataDir().string(),
-                               ec.message());
+        self.getLogger().error("Failed to create data directory {}: {}",
+                               self.getDataDir().string(), ec.message());
         return false;
     }
 
@@ -43,29 +44,28 @@ bool ClangeMeMod::load() {
     return true;
 }
 
-bool ClangeMeMod::enable() {
+bool MedusasGazeMod::enable() {
     auto &self = getSelf();
-    self.getLogger().debug("Enabling...");
+    self.getLogger().debug("Enabling Medusa's Gaze...");
+
     if (!mConfig.enabled) {
-        self.getLogger().info("clange_me is disabled by config");
+        self.getLogger().info("medusas_gaze is disabled by config");
         return true;
     }
 
-    self.getLogger().info("Config message: {}", mConfig.message);
+    self.getLogger().info("Medusa's Gaze is ready!");
     return true;
 }
 
-bool ClangeMeMod::disable() {
-    getSelf().getLogger().debug("Disabling...");
-    // Undo enable-time state here.
+bool MedusasGazeMod::disable() {
+    getSelf().getLogger().debug("Disabling Medusa's Gaze...");
     return true;
 }
 
-bool ClangeMeMod::unload() {
-    getSelf().getLogger().debug("Unloading...");
-    // Release load-time resources here.
+bool MedusasGazeMod::unload() {
+    getSelf().getLogger().debug("Unloading Medusa's Gaze...");
     mConfigFile.reset();
     return true;
 }
 
-} // namespace clange_me
+} // namespace medusas_gaze
