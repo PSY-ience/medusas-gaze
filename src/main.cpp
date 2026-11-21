@@ -1,5 +1,6 @@
+
 #include "mod/MyMod.h"
 
 #include <pl/Mod.hpp>
 
-PL_REGISTER_MOD(clange_me::ClangeMeMod, clange_me::ClangeMeMod::instance());
+PL_REGISTER_MOD(medusas_gaze::MedusasGazeMod, medusas_gaze::MedusasGazeMod::instance());
