@@ -1,3 +1,4 @@
+
 #pragma once
 
 #include <string>
@@ -5,30 +6,30 @@
 
 #include <pl/Config.hpp>
 
-namespace clange_me {
+namespace medusas_gaze {
 
 struct ModConfig {
     int version = 1;
     bool enabled = true;
-    std::string message = "Hello from clange_me";
+    std::string message = "Medusa's Gaze is ready!";
 };
 
 nlohmann::json makeDefaultConfigJson();
 nlohmann::json makeConfigSchemaJson();
 
-} // namespace clange_me
+} // namespace medusas_gaze
 
-template <> struct pl::config::Schema<clange_me::ModConfig> {
-    static constexpr std::string_view title = "Clange Me Config";
+template <> struct pl::config::Schema<medusas_gaze::ModConfig> {
+    static constexpr std::string_view title = "Medusa's Gaze Config";
     static constexpr std::string_view description = {};
 
     static constexpr FieldSchema field(std::string_view name) {
         if (name == "version")
             return {.title = "Version", .readOnly = true};
         if (name == "enabled")
-            return {.title = "Enabled", .description = "Turns clange_me behavior on or off."};
+            return {.title = "Enabled", .description = "Turns Medusa's Gaze on or off."};
         if (name == "message")
-            return {.title = "Message", .description = "Message written when the mod is enabled."};
+            return {.title = "Message", .description = "Message displayed by the mod."};
         return {};
     }
 };
