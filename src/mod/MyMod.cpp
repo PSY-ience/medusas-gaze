@@ -4,6 +4,7 @@
 #include <filesystem>
 
 #include <pl/Mod.hpp>
+#include <pl/ModMenu.hpp>
 
 namespace medusas_gaze {
 
@@ -39,6 +40,28 @@ bool MedusasGazeMod::load() {
         return false;
     }
     mConfig = mConfigFile->value();
+    const bool registered = pl::modmenu::ModuleBuilder(
+    "medusas_gaze",
+    "Medusa's Gaze"
+)
+.description("Petrifies mobs when you look at them.")
+.modId(self.getName())
+.defaultEnabled(mConfig.enabled)
+.onToggle([this](std::string_view moduleId, bool enabled) {
+    mConfig.enabled = enabled;
+    
+    if (enabled) {
+        enable();
+    } else {
+        disable();
+    }
+})
+.registerModule();
+
+if (!registered) {
+    self.getLogger().error("Failed to register Medusa's Gaze in Mod Menu!");
+    return false;
+}
 
     self.getLogger().info("Loaded {} from {}", self.getName(), self.getModDir().string());
     return true;
